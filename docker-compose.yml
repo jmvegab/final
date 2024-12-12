@@ -1,0 +1,13 @@
+version: '3'
+services:
+  my-python-app:
+    build: .
+    container_name: my-python-app-container
+    volumes:
+      - ./logs:/app/logs  # Montar el directorio de logs para persistirlos fuera del contenedor
+      - ./data:/app/data  # Montar el directorio 'data' para guardar los archivos JSON
+    environment:
+      - DB_HOST=${DB_HOST}  # Utiliza una variable de entorno para el host de la base de datos
+    command: python menu.py
+    tty: true  # Permitir la entrada interactiva
+    stdin_open: true  # Mantener la entrada estándar abierta para que el contenedor acepte entrada
